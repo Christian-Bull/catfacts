@@ -65,7 +65,7 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	defer fileLines.Close()
-	line, lastLine, err := ReadLine(file, lineNum)
+	line, lastLine, err := ReadLine(file, lineNum+1)
 	if err != nil {
 		c.l.Println("Error reading line ", line, lastLine, err)
 	}

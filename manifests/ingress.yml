@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catfacts
+  namespace: catfacts
+  labels:
+    app: catfacts
+  annotations:
+    acme.cert-manager.io/http01-ingress-class: external
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  ingressClassName: external
+  rules:
+    - host: catfacts.cbull.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catfacts
+                port:
+                  number: 5001
+  tls:
+    - hosts:
+      - catfacts.cbull.dev
+      secretName: catfacts-acme-certificate
