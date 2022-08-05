@@ -18,6 +18,6 @@ spec:
     # workspaces:
     # - name: output
     #   workspace: clone-build-push-data
-    params:
-    - name: url
-      value: $(params.repo-url)
+    # params:
+    # - name: url
+    #   value: $(params.repo-url)
