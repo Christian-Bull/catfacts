@@ -9,8 +9,8 @@ spec:
   params:
   - name: repo-url
     type: string
-  workspaces:
-  - name: clone-build-push-data
+  # workspaces:
+  # - name: clone-build-push-data
   tasks:
   - name: fetch-source
     taskRef:
