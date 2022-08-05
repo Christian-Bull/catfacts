@@ -15,7 +15,6 @@ spec:
   - name: fetch-source
     taskRef:
       name: git-clone
-      namespace: default
     workspaces:
     - name: output
       workspace: clone-build-push-data
