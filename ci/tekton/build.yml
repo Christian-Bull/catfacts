@@ -10,14 +10,14 @@ spec:
   - name: repo-url
     type: string
   workspaces:
-  - name: shared-data
+  - name: clone-build-push-data
   tasks:
   - name: fetch-source
     taskRef:
       name: git-clone
     workspaces:
     - name: output
-      workspace: shared-data
+      workspace: clone-build-push-data
     params:
     - name: url
       value: $(params.repo-url)
