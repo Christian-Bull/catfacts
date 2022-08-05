@@ -6,9 +6,9 @@ spec:
   description: | 
     This pipeline clones a git repo, builds a Docker image with Kaniko and
     pushes it to a registry
-  params:
-  - name: repo-url
-    type: string
+  # params:
+  # - name: repo-url
+  #   type: string
   # workspaces:
   # - name: clone-build-push-data
   tasks:
