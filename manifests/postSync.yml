@@ -17,9 +17,9 @@ spec:
           - "POST"
           - "--data-urlencode"
           - "payload={\"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
-          - "$(SLACK_WEBHOOK)"
+          - "{$SLACK_WEBHOOK}"
         envFrom:
           - secretRef:
               name: slack-webhook-secrets
       restartPolicy: Never
-  backoffLimit: 2
+  backoffLimit: 1
