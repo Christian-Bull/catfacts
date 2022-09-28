@@ -13,12 +13,12 @@ spec:
         image: curlimages/curl
         command:
           - env
-          # - "curl"
-          # - "-X"
-          # - "POST"
-          # - "--data-urlencode"
-          # - "payload={\"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
-          # - "${SLACK_WEBHOOK}"
+          - "curl"
+          - "-X"
+          - "POST"
+          - "--data-urlencode"
+          - "payload={\"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
+          - "${SLACK_WEBHOOK}"
         envFrom:
           - secretRef:
               name: slack-webhook-secrets
