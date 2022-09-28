@@ -19,7 +19,6 @@ spec:
           - "--data-urlencode"
           - "payload={\"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
           - "https://hooks.slack.com/services/$(ONE)/$(TWO)/$(THREE)"
-        args: ["$(SLACK_WEBHOOK)"]
         envFrom:
           - secretRef:
               name: slack-webhook-secrets
