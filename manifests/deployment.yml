@@ -19,3 +19,6 @@ spec:
       containers:
         - name: catfacts
           image: csbull55/catfacts:v2
+          envFrom:
+            - secretRef:
+                name: slack-webhook-secrets
