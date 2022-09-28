@@ -13,7 +13,7 @@ spec:
         image: csbull55/slack-webhook-go:v1
         env:
         - name: MESSAGE
-          value: "wala test :wala:"
+          value: "Catfacts: App Sync succeeded :catjam:"
         envFrom:
           - secretRef:
               name: slack-webhook-secrets
