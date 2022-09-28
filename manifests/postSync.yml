@@ -10,15 +10,10 @@ spec:
     spec:
       containers:
       - name: slack-notification
-        image: curlimages/curl
-        command:
-          - env
-          - "curl"
-          - "-X"
-          - "POST"
-          - "--data-urlencode"
-          - "payload={\"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
-          - "https://hooks.slack.com/services/$(ONE)/$(TWO)/$(THREE)"
+        image: csbull55/slack-webhook-go:v1
+        env:
+        - name: MESSAGE
+          value: "wala test :wala:"
         envFrom:
           - secretRef:
               name: slack-webhook-secrets
