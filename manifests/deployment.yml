@@ -18,4 +18,4 @@ spec:
     spec:
       containers:
         - name: catfacts
-          image: csbull55/catfacts:v2
+          image: csbull55/catfacts:v3
