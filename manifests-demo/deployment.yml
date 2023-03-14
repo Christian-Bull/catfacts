@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Deployment
+metadata:
+  namespace: catfacts-demo
+  name: catfacts-demo
+  labels:
+    app: catfacts-demo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: catfacts-demo
+  template:
+    metadata:
+      labels:
+        app: catfacts-demo
+    spec:
+      containers:
+        - name: catfacts-demo
+          image: csbull55/catfacts-demo:v2
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
