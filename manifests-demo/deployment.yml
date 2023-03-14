@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: catfacts-demo
   name: catfacts-demo
   labels:
     app: catfacts-demo
