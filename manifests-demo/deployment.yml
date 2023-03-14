@@ -25,5 +25,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-              ;lajsd;flkjas;ldkjf
-
