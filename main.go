@@ -25,6 +25,7 @@ func main() {
 
 	ch := newCatfact(l)
 	http.Handle("/", ch)
+	http.HandleFunc("/favicon.ico", faviconHandler)
 
 	l.Printf("Starting server on port %s", port)
 	l.Fatal(http.ListenAndServe(bindAddr, nil))
@@ -104,4 +105,8 @@ func lineCounter(r io.Reader) (int, error) {
 			return count, err
 		}
 	}
+}
+
+func faviconHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "html/favicon-32x32.png")
 }
