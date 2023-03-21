@@ -14,6 +14,7 @@ RUN mkdir src
 COPY go.mod ./
 COPY main.go .
 COPY src/facts.txt src/facts.txt
+COPY html html
 
 RUN GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o /app/main
 
