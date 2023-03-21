@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"text/template"
 	"time"
 )
 
@@ -71,7 +72,51 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		c.l.Println("Error reading line ", line, lastLine, err)
 	}
 
-	fmt.Fprintf(rw, line)
+	const tpl = `
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>{{.Title}}</title>
+			
+			<style>
+			body {
+			  background-color: #121212;
+			}
+			
+			div {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			h1 {
+				color: white;
+			}
+			</style>
+		</head>
+		<body>
+			<div><h1>{{.Fact}}</h1></div>
+		</body>
+	</html>`
+
+	t, err := template.New("webpage").Parse(tpl)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data := struct {
+		Title string
+		Fact  string
+	}{
+		Title: "Cat Facts",
+		Fact:  line,
+	}
+
+	err = t.Execute(rw, data)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // Read a specific line in a text file
