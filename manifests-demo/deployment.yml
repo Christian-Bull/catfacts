@@ -1,7 +1,6 @@
-apiVersion: argoproj.io/v1alpha1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: catfacts-demo
   name: catfacts-demo
   labels:
     app: catfacts-demo
@@ -18,7 +17,7 @@ spec:
     spec:
       containers:
         - name: catfacts-demo
-          image: csbull55/catfacts-demo:v2
+          image: csbull55/catfacts:v3
           resources:
             requests:
               memory: "64Mi"
@@ -26,4 +25,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-
