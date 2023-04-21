@@ -27,6 +27,7 @@ func main() {
 	ch := newCatfact(l)
 	http.Handle("/", ch)
 	http.HandleFunc("/favicon.ico", faviconHandler)
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
 
 	l.Printf("Starting server on port %s", port)
 	l.Fatal(http.ListenAndServe(bindAddr, nil))
@@ -72,6 +73,9 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		c.l.Println("Error reading line ", line, lastLine, err)
 	}
 
+	// select random image
+	imgNum := randgenerator.Intn(12)
+
 	const tpl = `
 	<!DOCTYPE html>
 	<html>
@@ -89,14 +93,25 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
+				text-align: center;
 			}
 			h1 {
 				color: white;
 			}
+
+			img {
+				width: 60%;
+				margin: auto;
+				display: block;
+			}
+
 			</style>
 		</head>
 		<body>
-			<div><h1>{{.Fact}}</h1></div>
+			<div>
+				<img src="assets/cats/cat-{{.Image}}.jpg" alt="Cute Cat Photo">
+				<h1>{{.Fact}}</h1>
+			</div>
 		</body>
 	</html>`
 
@@ -108,9 +123,11 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	data := struct {
 		Title string
 		Fact  string
+		Image int
 	}{
 		Title: "Cat Facts",
 		Fact:  line,
+		Image: imgNum,
 	}
 
 	err = t.Execute(rw, data)

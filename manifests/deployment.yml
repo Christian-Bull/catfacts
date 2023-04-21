@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: catfacts
-          image: csbull55/catfacts:v5
+          image: csbull55/catfacts:v6
           resources:
             requests:
               memory: "64Mi"

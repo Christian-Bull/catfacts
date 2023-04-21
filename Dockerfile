@@ -15,6 +15,7 @@ COPY go.mod ./
 COPY main.go .
 COPY src/facts.txt src/facts.txt
 COPY html html
+COPY assets assets
 
 RUN GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o /app/main
 
