@@ -31,7 +31,7 @@ jobs:
     - name: Build Container Image
       run: |
         platarch=linux/amd64,linux/arm64
-        buildah build --jobs=2 --platform=$platarch --manifest catfacts .
+        buildah bud --jobs=2 --platform=$platarch --manifest catfacts .
       
     - name: Tag Image
       run: |
