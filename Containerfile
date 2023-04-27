@@ -10,7 +10,7 @@ COPY go.mod ./
 
 COPY *.go ./
 
-RUN go build -o /main
+RUN GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o /main
 
 FROM scratch
 
