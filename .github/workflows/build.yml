@@ -1,12 +1,6 @@
 name: Build Container Image
 
 on:
-  push:
-    branches:
-      - develop
-      - main
-    paths-ignore:
-      - '**/readme.md'
 
 #   allows manual dispatch
   workflow_dispatch:
