@@ -74,7 +74,7 @@ func (c *Catfact) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// select random image
-	imgNum := randgenerator.Intn(12)
+	imgNum := randgenerator.Intn(18)
 
 	const tpl = `
 	<!DOCTYPE html>
