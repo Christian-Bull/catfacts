@@ -26,7 +26,7 @@ jobs:
     - name: Install Buildah and Podman
       run: |
         sudo apt-get update
-        sudo apt-get -y install buildah podman
+        sudo apt-get -y install buildah podman build-essential
       
     - name: Build Container Image
       run: |
