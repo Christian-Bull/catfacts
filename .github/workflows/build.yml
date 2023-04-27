@@ -27,7 +27,16 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install buildah podman
-      
+        
+    - name: Buildah Build
+      uses: redhat-actions/buildah-build@v2.12
+      with:
+        tags:
+          csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-${{ env.SHA }}
+          csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-latest
+        containerfiles: ./Containerfile
+        platform: linux/amd64,linux/arm64
+
     - name: Build Container Image
       run: |
         platarch=linux/amd64,linux/arm64
