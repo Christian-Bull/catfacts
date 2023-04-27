@@ -1,0 +1,53 @@
+name: Build Container Image
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths-ignore:
+      - '**/readme.md'
+
+#   allows manual dispatch
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: set env vars
+      run: |
+        echo "SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+        echo "GITHUB_REF_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+      
+    - name: Install Buildah and Podman
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install buildah podman
+      
+    - name: Build Container Image
+      run: |
+        platarch=linux/amd64,linux/arm64
+        buildah build --jobs=2 --platform=$platarch --manifest catfacts .
+      
+    - name: Tag Image
+      run: |
+        buildah tag localhost/catfacts csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-latest
+        buildah tag localhost/catfacts csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-${{ env.SHA }}
+        podman manifest rm localhost/catfacts
+      
+    - name: Login to DockerHub
+      uses: docker/login-action@v1.10.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    
+    - name: Push images to dockerhub
+      run: |
+        podman manifest push --all csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-latest docker://csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-latest
+        podman manifest push --all csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-${{ env.SHA }} docker://csbull55/catfacts:${{ env.GITHUB_REF_NAME }}-${{ env.SHA }}
+  
