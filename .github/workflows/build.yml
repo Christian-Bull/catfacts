@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3.5.2
       
     - name: set env vars
       run: |
@@ -26,12 +26,12 @@ jobs:
     - name: Install Buildah and Podman
       run: |
         sudo apt-get update
-        sudo apt-get -y install buildah podman build-essential
+        sudo apt-get -y install buildah podman
       
     - name: Build Container Image
       run: |
         platarch=linux/amd64,linux/arm64
-        buildah build --jobs=2 --platform=$platarch --manifest catfacts .
+        buildah build --jobs=2 --platform=$platarch --manifest catfacts --runtime-flag debug . 
       
     - name: Tag Image
       run: |
