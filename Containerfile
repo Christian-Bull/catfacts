@@ -10,7 +10,7 @@ COPY go.mod ./
 
 COPY *.go ./
 
-RUN GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o /main
+RUN CGO_ENABLED=1 GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o /main
 
 FROM scratch
 
