@@ -1,21 +1,21 @@
-apiVersion: batch/v1
-kind: Job
-metadata:
-  generateName: app-slack-notification-
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-spec:
-  template:
-    spec:
-      containers:
-      - name: slack-notification
-        image: csbull55/slack-webhook-go:v1
-        env:
-        - name: MESSAGE
-          value: "Catfacts: App Sync succeeded :catjam:"
-        envFrom:
-          - secretRef:
-              name: slack-webhook-secrets
-      restartPolicy: Never
-  backoffLimit: 1
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   generateName: app-slack-notification-
+#   annotations:
+#     argocd.argoproj.io/hook: PostSync
+#     argocd.argoproj.io/hook-delete-policy: HookSucceeded
+# spec:
+#   template:
+#     spec:
+#       containers:
+#       - name: slack-notification
+#         image: csbull55/slack-webhook-go:v1
+#         env:
+#         - name: MESSAGE
+#           value: "Catfacts: App Sync succeeded :catjam:"
+#         envFrom:
+#           - secretRef:
+#               name: slack-webhook-secrets
+#       restartPolicy: Never
+#   backoffLimit: 1
