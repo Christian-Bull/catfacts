@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: catfacts-rollouts
-  namespace: catfacts
+  namespace: cbull
   labels:
     app: catfacts
 spec:
