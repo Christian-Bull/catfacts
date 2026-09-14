@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: catfacts-demo
+  namespace: catfacts-demo
   labels:
     app: catfacts-demo
 spec:
